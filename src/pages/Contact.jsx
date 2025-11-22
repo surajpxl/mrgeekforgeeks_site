@@ -11,9 +11,9 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-16 px-4 relative"   // 🔥 FIX: removed min-h-screen
+      className="py-16 px-4 relative" 
     >
-      {/* Toast Notification */}
+    
       {toast && (
         <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg animate-slide-in z-50">
           Message sent successfully!
@@ -29,7 +29,7 @@ const Contact = () => {
         <iframe name="hiddenFrame" style={{ display: "none" }}></iframe>
 
         <form
-          action="https://formsubmit.co/sg7085005@gmail.com"
+          action="https://formsubmit.co/contact@mrgeekforgeeks.com"
           method="POST"
           target="hiddenFrame"
           onSubmit={showToast}
