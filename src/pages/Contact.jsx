@@ -8,12 +8,17 @@ const Contact = () => {
     setTimeout(() => setToast(false), 3000);
   };
 
+  // 🔥 FIX: handles submission + reset
+  const handleSubmit = (e) => {
+    e.preventDefault();     // stop full form reload
+    showToast();            // show popup toast
+    e.target.submit();      // manually submit to FormSubmit
+    e.target.reset();       // 🔥 clear all fields
+  };
+
   return (
-    <section
-      id="contact"
-      className="py-16 px-4 relative" 
-    >
-    
+    <section id="contact" className="py-16 px-4 relative">
+      {/* Toast Notification */}
       {toast && (
         <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg animate-slide-in z-50">
           Message sent successfully!
@@ -29,10 +34,10 @@ const Contact = () => {
         <iframe name="hiddenFrame" style={{ display: "none" }}></iframe>
 
         <form
-          action="https://formsubmit.co/contact@mrgeekforgeeks.com"
+          action="https://formsubmit.co/mrgeeks.com@gmail.com"
           method="POST"
           target="hiddenFrame"
-          onSubmit={showToast}
+          onSubmit={handleSubmit}       // ⭐ updated handler
           className="space-y-6"
         >
           <input type="hidden" name="_captcha" value="false" />
@@ -44,8 +49,7 @@ const Contact = () => {
               name="name"
               placeholder="Your Name"
               required
-              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 
-              focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
 
             <input
@@ -53,8 +57,7 @@ const Contact = () => {
               name="email"
               placeholder="Your Email"
               required
-              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600
-              focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
 
@@ -63,8 +66,7 @@ const Contact = () => {
             name="subject"
             placeholder="Subject"
             required
-            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600
-            focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           />
 
           <textarea
@@ -72,14 +74,12 @@ const Contact = () => {
             rows="6"
             placeholder="Your Message"
             required
-            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600
-            focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
           ></textarea>
 
           <button
             type="submit"
-            className="w-full md:w-auto bg-cyan-400 hover:bg-cyan-500 
-            text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+            className="w-full md:w-auto bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors duration-300"
           >
             Send Message
           </button>
