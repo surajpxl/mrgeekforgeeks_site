@@ -1,89 +1,91 @@
 import React, { useState } from "react";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [toast, setToast] = useState(false);
 
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data:", formData);
-    setSubmitted(true);
-    // reset form
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setTimeout(() => setSubmitted(false), 3000);
+  const showToast = () => {
+    setToast(true);
+    setTimeout(() => setToast(false), 3000);
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center  py-16 px-4">
-      <div className="w-[90%] max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow-lg p-8 md:p-16 text-gray-200">
-        <h2 className="text-4xl font-bold text-cyan-400 mb-8 text-center">Contact Us</h2>
+    <section
+      id="contact"
+      className="py-16 px-4 relative"   // 🔥 FIX: removed min-h-screen
+    >
+      {/* Toast Notification */}
+      {toast && (
+        <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg animate-slide-in z-50">
+          Message sent successfully!
+        </div>
+      )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="w-[80%] max-w-4xl mx-auto bg-gray-800 rounded-2xl shadow-lg p-8 md:p-16 text-gray-200">
+        <h2 className="text-4xl font-bold text-cyan-400 mb-8 text-center">
+          Contact Us
+        </h2>
+
+        {/* Hidden iframe to avoid redirect */}
+        <iframe name="hiddenFrame" style={{ display: "none" }}></iframe>
+
+        <form
+          action="https://formsubmit.co/sg7085005@gmail.com"
+          method="POST"
+          target="hiddenFrame"
+          onSubmit={showToast}
+          className="space-y-6"
+        >
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input
               type="text"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
               placeholder="Your Name"
               required
-              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 
+              focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
+
             <input
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
               placeholder="Your Email"
               required
-              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600
+              focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
 
           <input
             type="text"
             name="subject"
-            value={formData.subject}
-            onChange={handleChange}
             placeholder="Subject"
             required
-            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600
+            focus:outline-none focus:ring-2 focus:ring-cyan-400"
           />
 
           <textarea
             name="message"
-            value={formData.message}
-            onChange={handleChange}
             rows="6"
             placeholder="Your Message"
             required
-            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="w-full p-3 rounded-lg bg-gray-700 border border-gray-600
+            focus:outline-none focus:ring-2 focus:ring-cyan-400"
           ></textarea>
 
           <button
             type="submit"
-            className="w-full md:w-auto bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+            className="w-full md:w-auto bg-cyan-400 hover:bg-cyan-500 
+            text-gray-900 font-bold py-3 px-6 rounded-lg transition-colors duration-300"
           >
             Send Message
           </button>
-
-          {submitted && (
-            <p className="text-green-400 text-center mt-4">Your message has been sent!</p>
-          )}
         </form>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-300 text-center md:text-left">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-300 text-center md:text-left">
           <div>
             <h3 className="font-semibold text-cyan-400 mb-2">Email</h3>
             <p>contact@mrgeekforgeeks.com</p>
@@ -98,6 +100,19 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* Toast Animation */}
+      <style>
+        {`
+          .animate-slide-in {
+            animation: slide-in 0.4s ease-out forwards;
+          }
+          @keyframes slide-in {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+        `}
+      </style>
     </section>
   );
 };

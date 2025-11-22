@@ -13,7 +13,7 @@ const Home = () => {
 
   // Set minimum delay (e.g., 1 second)
   useEffect(() => {
-    const timer = setTimeout(() => setMinDelayPassed(true), 1500);
+    const timer = setTimeout(() => setMinDelayPassed(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
