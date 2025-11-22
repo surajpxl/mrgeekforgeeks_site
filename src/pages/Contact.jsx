@@ -13,7 +13,7 @@ const Contact = () => {
     e.preventDefault();     // stop full form reload
     showToast();            // show popup toast
     e.target.submit();      // manually submit to FormSubmit
-    e.target.reset();       // 🔥 clear all fields
+    e.target.reset();       //  clear all fields
   };
 
   return (
@@ -88,7 +88,7 @@ const Contact = () => {
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-300 text-center md:text-left">
           <div>
             <h3 className="font-semibold text-cyan-400 mb-2">Email</h3>
-            <p>contact@mrgeekforgeeks.com</p>
+            <p>mrgeeks.com@gmail.com</p>
           </div>
           <div>
             <h3 className="font-semibold text-cyan-400 mb-2">Phone</h3>
